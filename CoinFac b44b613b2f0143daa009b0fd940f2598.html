@@ -1,0 +1,664 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CoinFac</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="057b53f7-0b2a-41c7-bb1d-6dfaa292cbaf" class="page serif"><header><img class="page-cover-image" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/coinfac.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">✏️</span></div><h1 class="page-title">CoinFac</h1></header><div class="page-body"><p id="b9410bfc-ffae-4b06-a053-9c7374ab9cfd" class="block-color-gray">Having a good financial balance must always be objective for all people, often the ability to accumulate wealth and be financially successful is not just about capital gain, but the ability to save money. The following article talks about a project that I started a few years ago, it is called CoinFac, and is nothing more than an application used to make capital accumulation transparent and easy.</p><p id="af84ebf8-6ed4-4225-a151-99d479de13fb" class="">CoinFac emerged as open source around 2018, at first it was just an object of study, then it evolved into a more complete project. Since 2015 I used to have a financial spreadsheet that I used in Apple&#x27;s Numbers, since then I renewed the spreadsheet, removing what was useful and what was not, in fact I was never one of those people who write down all expenses day by day, in fact, time is the most valuable thing. That was why in 2019, my financial spreadsheet was reduced to a few tables, that was good because it kept me filling in the values and not falling into the laziness trap.</p><h2 id="b9ec75e0-d611-4f88-9250-85206b127846" class="">Spreadsheet 2017 vs 2019</h2><p id="896e577f-988b-40e4-a179-ff4417ac492b" class="">Even before 2019, my spreadsheets were complete and complex, it took me a few minutes, sometimes even hours to fill in all the expenses and update the graphics, it was all very cool, but it didn&#x27;t take long for me to realize that I was using only 30% of the spreadsheet.</p><div id="d3f0af34-10f7-4368-bee2-2e062b2ac032" class="column-list"><div id="648355dd-2780-4a72-8d19-d56e7caeaec3" style="width:50%" class="column"><figure id="b44b613b-2f01-43da-a009-b0fd940f2598" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled.png"><img style="width:432px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled.png"/></a><figcaption>Spreadsheet in 2017</figcaption></figure></div><div id="745c71f2-9edc-4f9c-8c1b-d2370ac5d3db" style="width:50%" class="column"><figure id="fd3069d1-3fe1-46f7-b7e5-2f84610520c4" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%201.png"><img style="width:432px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%201.png"/></a><figcaption>Simplified spreadsheet in 2020</figcaption></figure><p id="8b9f8451-96d6-4fed-b794-fa41c711ac46" class="">
+</p></div></div><p id="0f0e6550-5bdd-4169-afdf-01505ad56b35" class="">I had tested several financial applications, paid a few annual subscriptions, but none seemed to represent what I wanted, something simple, easy, and that didn&#x27;t take me too long, after all, I have no problem saying that I was always lazy in using these apps , but I didn&#x27;t want to lose control of how much I had TODAY. That&#x27;s why CoinFac came about:</p><p id="19078a42-d6ec-4b3c-9ea4-2b8b4794289e" class="">
+</p><figure id="5730b391-9780-4ed4-b5c7-b9a4d267f047" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%202.png"><img style="width:1868px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%202.png"/></a></figure><h1 id="8048af52-ea15-4fd1-9796-095d8449589f" class="">The software</h1><p id="cb1256ce-75e3-4071-a3cb-9c87c0a9d2fb" class="">CoinFac is the result of years of using spreadsheets. All the simple features that I wanted in a financial application I put in CoinFac, making the main objective of the software:</p><p id="edf4aee4-a667-479d-9ffc-eed35968ebec" class="">
+</p><ol id="db42ea96-0cf7-44d5-9734-b666ae4afeb8" class="numbered-list" start="1"><li>Be simple</li></ol><ol id="7f6096f1-5c8e-428d-b423-3007ba8e55cd" class="numbered-list" start="2"><li>Help save money</li></ol><ol id="a6abab1d-b724-40e8-8e38-a60298e16f14" class="numbered-list" start="3"><li>Clearly report my assets</li></ol><p id="691179ef-0d83-4162-a10e-35de7ae62be8" class="">
+</p><p id="d3302695-7fef-4995-8874-4a187292d87f" class="">I still don&#x27;t have concrete plans on this application, but soon I should be preparing an RFP for anyone interested in being part of the development of CoinFac, or maybe, make it available as open source. Let&#x27;s go the features:</p><h1 id="07e4b999-2edf-4394-a2e2-b2c9215dc0be" class="">Functionalities</h1><h2 id="3c0249dd-1899-4437-8e22-5e7f7094c3bf" class="">Accounts / Synchronization</h2><p id="6ddc9cf1-1904-4a82-8baa-762d13bd69f2" class="">CoinFac uses Auth0 to log in to the application, this means that to log in, just sign up as shown below or else, simply use the Google account to access the application, an advantage of using the Google account is that all data will be already informed and CoinFac will use your Google photo as an Avatar 🙂</p><p id="8f6c0a7f-6f12-4b65-a5bf-26a3efb79e8b" class="">
+</p><p id="36a23c35-5226-4a7a-9455-6c007092ee97" class="">It is important to note that CoinFac uses graphics on almost all screens, they facilitate understanding and provide a <a href="http://sitn.hms.harvard.edu/flash/2018/dopamine-smartphones-battle-time/#:~:text=Unexpected%20rewards%20increase%20the%20activity,reward%20having%20no%20additional%20effect.">dopamine feedback effect</a>. It&#x27;s cool to see the lines going up, and even cooler to see that the software is thinking for you, in some sessions CoinFac says which accounts have the most money, which accounts you need to pay more attention to, and what your economic level is. There is always a psychology behind the data. 💆🏻‍♂️</p><p id="04ad47db-2cc1-421c-8621-8038fd0a3d4c" class="">
+</p><figure id="f3106494-fcf1-4e62-96a7-18905f3ef8e8" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/login.gif"><img style="width:1891px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/login.gif"/></a></figure><p id="b64141f0-2d46-406e-948d-417428b85591" class="">
+</p><p id="b2d7c48f-0c78-4c10-a46f-400307cb81dc" class="">
+</p><p id="05c0caaf-f469-4297-a9be-4aa425bcf13a" class="">Once the user is authenticated, the menu must appear with the following options:</p><figure id="f2257d93-d404-4cd8-a545-270c7fcac9ca" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%203.png"><img style="width:1891px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%203.png"/></a></figure><ol id="3b9a8475-25d9-4a56-97ee-fb606b9ac66c" class="numbered-list" start="1"><li>Accounts</li></ol><p id="1c636db9-8569-4514-8d13-031949c25c3c" class="">Accounts represent one of CoinFac&#x27;s most important information. Unlike most financial applications, at CoinFac, account registration should become a habit, but what is account registration? Accounts are all resources where you keep money, it can be a salary account, a financial application or simply a wallet. Account registrations must be made at the same time, if three accounts are registered with CoinFac, the registrations must be made for all three accounts at the same time, obliging the registrations in this way will make you keep in mind how much money you saved in each account.</p><p id="bf62a85e-754a-4904-aed1-533ce0722e10" class="">
+</p><ol id="1badc3f6-80b7-464a-9c76-b7b6eba6380d" class="numbered-list" start="1"><li>Incomes</li></ol><p id="ac95cd7c-36f5-4597-8665-1aa6a2015ebb" class="">In this session are informed all resources where money is received, it can be a company name, where a salary is deposited. Why is it important to know your earnings clearly? Because it becomes easier to objectify your future, less capital coming in can be the opportunity for new challenges.</p><p id="ab8c01eb-777d-4957-bbdb-a8b219a3038a" class="">
+</p><ol id="a3cb651f-243b-49d9-8701-77d0e1445d66" class="numbered-list" start="1"><li>Expenses</li></ol><p id="c633b4ca-11ce-485f-9f84-5551f974f9c4" class="">Here, the expenses are reported, such as paying a rent or installments of a car. Why not register everything, like an ice cream from the last week? This is what all apps do, as stated earlier, a lot of work will make you give up using the app, the focus will be on what is most important. Fixed Expenses.</p><p id="af7d83e7-f75d-48c5-8fa4-68ae68b22f92" class="">
+</p><ol id="edb926bb-434b-4af7-953d-8b9885efd981" class="numbered-list" start="1"><li>Foreign Currency</li></ol><p id="b5c3f82b-3755-4e8c-a40e-99f1b6c12d9d" class="">Many financial applications do not have a specific area for foreign resources. Here it is possible to monitor the price of the chosen currency, register capital and as in all other areas, monitor everything visually through the graphics.</p><p id="1a0f543f-78e2-4e2d-89b1-47f3f4472e40" class="">
+</p><ol id="f50202b2-6782-48a1-a0e5-11a9dc743509" class="numbered-list" start="1"><li>Predictions</li></ol><p id="2ed4d926-8e0d-4af3-be59-0353f3921ebe" class="">In this session we present some latest news on two special areas: stocks and cryptocurrencies. and you can set up a visualization scheme.</p><p id="9eb863b9-de59-40b6-b500-16bfed4037d4" class="">
+</p><ol id="6dcda402-2281-4993-b0c3-542ea9b716d3" class="numbered-list" start="1"><li>Blockchain</li></ol><p id="0443f1e9-ce74-4ba5-a03e-71535a141425" class="">With the operation directly linked to the predictions function, this area is intended for the creation and management of a cryptocurrency portfolio.</p><h1 id="5febdd63-22d8-43df-a060-57a1bbe0887a" class="">Accounts</h1><p id="fdd41397-dbe8-4f5a-ae3b-139bc9e91101" class="">On the account page it is possible to have access to the two main features, the creation of new accounts and the creation of new records.</p><p id="98484d71-8f94-443c-a71a-bd599853f34c" class="">Creating new accounts:</p><p id="09189596-1218-467b-a782-a5d6c9db64ae" class="">
+</p><figure id="dfa1783e-95f3-41b7-b362-cba6bf45bab7" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/accounts.gif"><img style="width:1891px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/accounts.gif"/></a></figure><p id="b9ac7e0e-f4b8-413d-964c-fd2ca47a6fde" class="">
+</p><p id="dc804e45-4d73-4804-906c-7f09622243c0" class="">Adding a new record:</p><p id="b68d637d-2658-480c-ba17-7de818bc608a" class="">
+</p><figure id="c1cb83b8-a5b3-41ea-b842-57fbb4d28985" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/records.gif"><img style="width:1891px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/records.gif"/></a></figure><p id="807a313e-4cdb-4f14-aa1a-fefa8814898d" class="">
+</p><p id="90bebedc-8293-410a-84f5-27fd8fc0006d" class="">Record contains indicators, if the current record is larger than the previous one, it is represented by the green arrow, otherwise the red arrow. The records on this screen were built using blockchain concepts, they are made available in blocks where the greatest emphasis is on the most recent record. In the example below it is possible to notice that two accounts are up while the others are down, needing more attention. The capacity for wealth is in the ability to save money, keeping as much account as possible in the green situation represents a good financial health.</p><p id="90c90798-dc4b-41b1-a614-00ef6fce55f2" class="">
+</p><figure id="d6c318a4-6e3d-4372-aeca-57adceeb0dc9" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/indicators.gif"><img style="width:1891px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/indicators.gif"/></a></figure><p id="d4221f9a-985e-4e01-9f85-01f41b480267" class="">It is also possible to edit and remove records, in the example below we will delete the records from NBC:</p><p id="8c65e8e0-06bb-485f-9afe-ac87b54d0839" class="">
+</p><figure id="94b7d97b-8015-4c95-84f4-eb53b1fdc246" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/remove.gif"><img style="width:1891px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/remove.gif"/></a></figure><p id="826b4a56-31da-4551-bc04-76a35cc29bb9" class="">You could see some error messages during these recordings, many features were still incomplete, many minor bugs can be found 💀, especially in this small project from one developer 😄</p><h1 id="991f0f72-5592-4b72-b0d7-a34baa0b5ce0" class="">Technology Stack</h1><h2 id="2a2b88fd-ef05-4d27-a920-0d846dd59eea" class="">Operations</h2><p id="fed6060c-70ff-4f5c-82c0-f8f045f0da67" class=""><strong>GitHub Actions</strong> help you automate your software development workflows in the same place you store code and collaborate on pull requests and issues.</p><figure id="b9acbf58-a590-43a6-87ac-43d4e5f52b14" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%204.png"><img style="width:1419px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%204.png"/></a><figcaption>Github actions</figcaption></figure><p id="d11e4f96-22b3-4c3d-871b-46fc244a4e4f" class=""><strong>Azure DevOps</strong> is a Microsoft product that provides version control, reporting, requirements management, project management, automated builds, testing and release management capabilities. It covers the entire application lifecycle, and enables DevOps capabilitie</p><figure id="f0ede0a8-ecf5-4b04-b29f-cd8b45268f36" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%205.png"><img style="width:940px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%205.png"/></a><figcaption>Azure Devops</figcaption></figure><p id="c082fe2a-af75-4efd-bd4f-15423d752142" class="">
+</p><figure id="bb0f7448-8112-4caf-90d0-964d103f5420" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%206.png"><img style="width:765px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%206.png"/></a><figcaption>Sprint board</figcaption></figure><p id="c9472221-ada8-492f-a94e-1e022d571ec6" class="">
+</p><p id="37d60ac6-3fa5-4675-b449-6855860f1144" class="">
+</p><figure id="7943eb5c-51bb-46c0-9825-59a316209e87" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%207.png"><img style="width:1170px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%207.png"/></a><figcaption>Pipeline</figcaption></figure><h2 id="5943e0c8-9b45-4fc4-aab1-46f69abb34fd" class="">Architecture</h2><p id="13cc9397-a69f-45ab-b2ca-a19744044b76" class=""><strong>Domain-Driven Design</strong> is an approach to software development that centers the development on programming a domain model that has a rich understanding of the processes and rules of a domain.</p><p id="1b91072e-83c5-44e4-8ba5-8ef543a90349" class="">
+</p><div id="c73c5bc2-baf5-4d19-921b-e5009e07846e" class="column-list"><div id="1371a554-e4f3-477a-b967-91e71d7519a3" style="width:50%" class="column"><figure id="32889cbf-db24-425a-ab3a-d7014ecd6802" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%208.png"><img style="width:288px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%208.png"/></a></figure></div><div id="7b6f1f7d-6b79-4839-8ee6-673103c76762" style="width:50%" class="column"><figure id="e3c08d9b-e1cd-4bad-8686-706d6d174c7c" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%209.png"><img style="width:461px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%209.png"/></a></figure><p id="756d228d-571c-43b3-b8ff-a2ed54b7aaee" class="">
+</p></div></div><h2 id="3de0416b-4e14-43b9-8990-d90ba6568a88" class="">Keywords</h2><p id="3f78b04d-c33f-40cc-9f56-aa2f15aed186" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="581689e3-6b66-4996-ab16-c1972e48e547"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">.NET Core, Agular, Entity-Framework, Repository Pattern,  SQL Server, Auth0, HTTP Header, CORS, SOLID, Clean Architecture, Domain Driven Design, TBD ( Trunk Based Development), CI/CD, Git,  HTTP Security Headers, HSTS</div></figure><h2 id="084a1b72-b11c-405f-8e32-a6ff0173b753" class="">Development</h2><p id="6898b90b-934f-424e-8973-83bd185bc270" class="">
+</p><div id="bea06d25-3f4b-427e-b538-384f9b3ab4d7" class="column-list"><div id="09354991-5b97-4479-b990-74740c24601c" style="width:20.833333333333336%" class="column"><figure id="4f5d3045-4e21-470d-a8c2-aecfffccf29e" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2010.png"><img style="width:192px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2010.png"/></a></figure><p id="cae25031-5a9b-434f-a477-86d74c9c5830" class="">
+</p></div><div id="2bcd3f08-0550-4d03-b64b-1cc4d0d9883e" style="width:29.166666666666664%" class="column"><figure id="2d7c9d43-cdd1-4074-af47-06a48b55c0e4" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2011.png"><img style="width:192px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2011.png"/></a></figure><p id="bea85d33-b0a8-4430-9f11-57020825c6a2" class="">
+</p></div><div id="fb6b7df4-df87-4c94-bd76-940f9cae79b2" style="width:50.000000000000014%" class="column"><figure id="1bdc2be5-b111-4048-b381-0b1fb0236c7c" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2012.png"><img style="width:185px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2012.png"/></a></figure></div></div><p id="2dc4ea96-8c7d-4614-97cb-f88b5ac67f6a" class="">
+</p><div id="97050bb1-e19e-48ee-bf85-5061a6ed29a5" class="column-list"><div id="3a235aa2-e1be-4f8b-97b0-b6217e78fd5f" style="width:33.333333333333336%" class="column"><figure id="cf614ef0-aea2-440f-8f85-f571defe572e" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2013.png"><img style="width:262px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2013.png"/></a></figure></div><div id="aaaa4a53-4041-4605-9b64-0cd5751a6051" style="width:33.333333333333336%" class="column"><figure id="c4a57e0c-8070-417a-b162-e6d6a0e43012" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2014.png"><img style="width:216px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2014.png"/></a></figure><p id="cd224b31-ebfc-476c-aabb-2abb6fec8d37" class="">
+</p></div><div id="b2df197d-efd7-4dfe-bea4-f9ebcafdb789" style="width:33.33333333333333%" class="column"><figure id="582b1ed2-95d3-4a2f-9c78-7f4fb970b022" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2015.png"><img style="width:372px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2015.png"/></a></figure><p id="ec26e97f-6edd-41e3-b9f5-1ccf0df2f8e9" class="">
+</p></div></div><p id="56ba93a1-ffd0-4b44-a9f8-ea79fb5e5abb" class="">
+</p><p id="26443802-b482-4a56-8de6-2cce7d7ab02a" class="">
+</p><div id="0cd2b97e-3abc-48dc-9d94-1f4042800707" class="column-list"><div id="1f848fd3-7f62-49d8-ad54-daf3db6a1057" style="width:40.625%" class="column"><figure id="a8304dc1-0d34-4dba-8140-f7015576ff28" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2016.png"><img style="width:120px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2016.png"/></a></figure><p id="9364775d-9e87-402b-946f-93fad4a50726" class="">
+</p><figure id="d18d80e7-0689-4282-8ba7-bab0ce2d8cd4" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2017.png"><img style="width:195px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2017.png"/></a></figure></div><div id="1cba6ff3-adad-4ff5-9c01-67cc7b392610" style="width:31.25%" class="column"><figure id="87b5956f-a209-4ce2-8a57-61ddd3b92d82" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2018.png"><img style="width:108px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2018.png"/></a></figure><p id="e7790a9d-ba6c-40af-b5de-bc86270e6529" class="">
+</p><figure id="9b8f7b82-2951-4216-9da5-a58dbf3d5cea" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2019.png"><img style="width:384px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2019.png"/></a></figure></div><div id="f1220274-abbb-44de-beac-0f4bd680030e" style="width:3.125%" class="column"><p id="ca2a29bc-65fc-4b40-9c07-f986a36d4ecf" class="">
+</p></div><div id="655ba369-6cd4-4dbc-aabf-9a2ce437b46a" style="width:25%" class="column"><figure id="7e0064aa-2a50-406e-a0a6-0ca4c5172b97" class="image"><a href="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2020.png"><img style="width:432px" src="CoinFac%20b44b613b2f0143daa009b0fd940f2598/Untitled%2020.png"/></a></figure><p id="f2512eda-efc6-4384-ae27-6b4ade824b23" class="">
+</p></div></div></div></article></body></html>
